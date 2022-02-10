@@ -9,7 +9,14 @@ const checksum_lib = require('./checksum');
 
 app.use(express.json()); 
 app.use(express.urlencoded());
-
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 app.get('/', function(req, res) {
     console.log(req);
     res.send(JSON.stringify({ Hello: 'World' }));
