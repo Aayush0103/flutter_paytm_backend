@@ -107,8 +107,8 @@ function genchecksumforrefund(params, key, cb) {
   var data = paramsToStringrefund(params);
 crypt.gen_salt(4, function (err, salt) {
   if(err){
-		console.log(err);
-	}
+    console.log(err);
+  }
     var sha256 = crypto.createHash('sha256').update(data + salt).digest('hex');
     var check_sum = sha256 + salt;
     var encrypted = crypt.encrypt(check_sum, key);
