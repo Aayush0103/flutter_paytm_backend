@@ -10,7 +10,15 @@ const checksum_lib = require('./checksum');
 
 app.use(express.json()); // to support JSON-encoded bodies
 app.use(express.urlencoded()); //
-
+//CORS ACCESS CONTROL
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 app.get('/', function(req, res) {
     console.log(req);
     res.send(JSON.stringify({ Hello: 'World' }));
@@ -47,7 +55,7 @@ app.post('/generateTxnToken', function(request, res) {
         "mid": MID,
 
         /* Find your Website Name in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys */
-        "websiteName": website == undefined ? "DEFAULT" : website,
+        "websiteName": website == undefined ? "WEBSTAGING" : website,
 
         /* Enter your unique order id */
         "orderId": orderId,
